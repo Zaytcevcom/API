@@ -1,5 +1,6 @@
 .env
 
+/config/-database.php
 /config/database.php
 
 # temp files dir
