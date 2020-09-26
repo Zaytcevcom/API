@@ -1,9 +1,16 @@
 {
+    "name": "api/slim",
+    "description": "slim api",
     "require": {
         "slim/slim": "4.*",
         "nyholm/psr7": "^1.3",
         "nyholm/psr7-server": "^1.0",
         "illuminate/database": "~5.1",
         "php-di/php-di": "^6.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "api\\": "api/"
+        }
     }
 }

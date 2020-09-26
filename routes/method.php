@@ -7,12 +7,12 @@ $app->map(['GET', 'POST'], '/method/{controller}.{action}', function (Request $r
     
     $version = (isset($args['v'])) ? $args['v'] : $config['version'];
 
-    $filename = ROOT_DIR . DIRECTORY_SEPARATOR . 'versions' . DIRECTORY_SEPARATOR . $version . DIRECTORY_SEPARATOR . $args['controller'] . DIRECTORY_SEPARATOR . $args['action'] . '.php';
+    $filename = ROOT_DIR . DIRECTORY_SEPARATOR . 'api' . DIRECTORY_SEPARATOR . 'method' . DIRECTORY_SEPARATOR . $version . DIRECTORY_SEPARATOR . $args['controller'] . DIRECTORY_SEPARATOR . $args['action'] . '.php';
 
     // Method not found
     if (!file_exists($filename)) {
         
-        $response->getBody()->write(json_encode(['message' => 'Method not found']));
+        $response->getBody()->write(json_encode(['error' => ['code' => 123, 'message' => 'Method not found']]));
 
         return $response
             ->withHeader('Content-Type', 'application/json')
