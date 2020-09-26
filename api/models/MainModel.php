@@ -10,10 +10,4 @@ use Illuminate\Database\Eloquent\Model;
 class MainModel extends Model
 {
     public $timestamps = false;
-
-    protected $container;
-
-    /*public function __construct(ContainerInterface $c) {
-        $this->container = $c;
-    }*/
 }

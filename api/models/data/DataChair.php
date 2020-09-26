@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace api\models;
+namespace api\models\data;
 
 use api\models\MainModel;
 

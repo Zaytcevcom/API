@@ -3,7 +3,14 @@
 // Флаг запуска скрипта
 // Проверка входных данных
 // функция положительного и отрицательного ответа
-// основная модель для связи с БД
-// модель объекта
+
+use api\models\data\DataCountry;
+
+$model = DataCountry::find(1);
+//$model->name = $model->name . '1';
+//$model->save();
+
+var_dump($model->name);
 
 return ['h' => 'j'];
+
