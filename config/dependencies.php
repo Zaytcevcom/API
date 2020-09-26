@@ -27,3 +27,5 @@ $container->set('db', function () {
 
     return $capsule;
 });
+
+$container->get('db');

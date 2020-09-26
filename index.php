@@ -28,12 +28,6 @@ $app->addRoutingMiddleware();
 
 $errorMiddleware = $app->addErrorMiddleware(true, true, true);
 
-/*echo 'g';
-$model = new \api\MainModel();
-var_dump($model); die('k');
-echo 'jh';
-*/
-
 require ROOT_DIR . '/routes/method.php';
 require ROOT_DIR . '/routes/page.php';
 

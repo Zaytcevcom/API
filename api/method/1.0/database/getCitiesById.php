@@ -2,7 +2,7 @@
 
 use api\models\DataCity;
 
-$model = new DataCity();
+$model = DataCity::find(1);
 
 var_dump($model);
 
