@@ -36,8 +36,57 @@ class DataChair extends MainModel
     protected $table = 'data_emoji';
 
     protected $fillable = [
-        'name', 'unified', 'non_qualified', 'docomo', 'au', 'softbank', 'google', 'image',
-        'sheet_x', 'sheet_y', 'short_name', 'short_names', 'text', 'texts', 'category',
-        'sort_order', 'added_in', 'has_img_apple', 'has_img_google', 'has_img_twitter', 'has_img_facebook', 'has_img_lo'
+        'name',
+        'unified',
+        'non_qualified',
+        'docomo',
+        'au',
+        'softbank',
+        'google',
+        'image',
+        'sheet_x',
+        'sheet_y',
+        'short_name',
+        'short_names',
+        'text',
+        'texts',
+        'category',
+        'sort_order',
+        'added_in',
+        'has_img_apple',
+        'has_img_google',
+        'has_img_twitter',
+        'has_img_facebook',
+        'has_img_lo'
     ];
+
+    // Get the available fields
+    public static function getAvailableFields()
+    {
+        return [
+            'id',
+            'name',
+            'unified',
+            'non_qualified',
+            'docomo',
+            'au',
+            'softbank',
+            'google',
+            'image',
+            'sheet_x',
+            'sheet_y',
+            'short_name',
+            'short_names',
+            'text',
+            'texts',
+            'category',
+            'sort_order',
+            'added_in',
+            'has_img_apple',
+            'has_img_google',
+            'has_img_twitter',
+            'has_img_facebook',
+            'has_img_lo'
+        ];
+    }
 }

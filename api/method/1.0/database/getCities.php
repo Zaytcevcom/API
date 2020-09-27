@@ -6,11 +6,11 @@ $controller = new DataController($request, $response, $args);
 
 // Params
 $search     = $controller->getToStringOrNull('search');
-$need_all   = $controller->getToInt('need_all');
+$id_country = $controller->getToIntOrNull('id_country');
 $count      = $controller->getToIntOrNull('count');
 $offset     = $controller->getToIntOrNull('offset');
 
-// Get countries
-$data = $controller->getCountries($search, $need_all, $count, $offset);
+// Get cities
+$data = $controller->getCities($search, $id_country, $count, $offset);
 
 return $controller->success($data);

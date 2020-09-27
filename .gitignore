@@ -1,13 +1,13 @@
 .env
 
-/config/-database.php
-/config/database.php
+# local db file
+/config/db.local.php
 
 # temp files dir
 /files/tmp
 
 # composer vendor dir
-/vendor/*
+/vendor
 
 # Mac DS_Store Files
 .DS_Store

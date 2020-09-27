@@ -15,5 +15,18 @@ class DataChair extends MainModel
 {
     protected $table = 'data_chair';
 
-    protected $fillable = ['id_faculty', 'name'];
+    protected $fillable = [
+        'id_faculty',
+        'name'
+    ];
+
+    // Get the available fields
+    public static function getAvailableFields()
+    {
+        return [
+            'id',
+            'id_faculty',
+            'name'
+        ];
+    }
 }

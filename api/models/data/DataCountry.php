@@ -22,5 +22,32 @@ class DataCountry extends MainModel
 {
     protected $table = 'data_country';
 
-    protected $fillable = ['name', 'full_name', 'icon', 'phone', 'phone_length', 'latitude', 'longitude', 'iso3166', 'is_ignore'];
+    protected $fillable = [
+        'name',
+        'full_name',
+        'icon',
+        'phone',
+        'phone_length',
+        'latitude',
+        'longitude',
+        'iso3166',
+        'is_ignore'
+    ];
+
+    // Get the available fields
+    public static function getAvailableFields()
+    {
+        return [
+            'id',
+            'name',
+            'full_name',
+            'icon',
+            'phone',
+            'phone_length',
+            'latitude',
+            'longitude',
+            'iso3166',
+            'is_ignore'
+        ];
+    }
 }

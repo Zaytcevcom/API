@@ -10,4 +10,10 @@ use Illuminate\Database\Eloquent\Model;
 class MainModel extends Model
 {
     public $timestamps = false;
+
+    // Get the available fields
+    public static function getAvailableFields()
+    {
+        
+    }
 }
