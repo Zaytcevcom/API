@@ -15,5 +15,18 @@ class DataSchool extends MainModel
 {
     protected $table = 'data_school';
 
-    protected $fillable = ['id_city', 'name'];
+    protected $fillable = [
+        'id_city',
+        'name'
+    ];
+
+    // Get the available fields
+    public static function getAvailableFields()
+    {
+        return [
+            'id',
+            'id_city',
+            'name'
+        ];
+    }
 }

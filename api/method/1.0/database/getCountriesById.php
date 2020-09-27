@@ -1,16 +1,13 @@
 <?php
 
-// Флаг запуска скрипта
-// Проверка входных данных
-// функция положительного и отрицательного ответа
+use api\controllers\DataController;
 
-use api\models\data\DataCountry;
+$controller = new DataController($request, $response, $args);
 
-$model = DataCountry::find(1);
-//$model->name = $model->name . '1';
-//$model->save();
+// Params
+$ids = $controller->getToArrayInt('country_ids');
 
-var_dump($model->name);
+// Get countries by id
+$data = $controller->getCountriesById($ids);
 
-return ['h' => 'j'];
-
+return $controller->success($data);

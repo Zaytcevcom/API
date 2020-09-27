@@ -15,5 +15,18 @@ class DataFaculty extends MainModel
 {
     protected $table = 'data_faculty';
 
-    protected $fillable = ['id_university', 'name'];
+    protected $fillable = [
+        'id_university',
+        'name'
+    ];
+
+    // Get the available fields
+    public static function getAvailableFields()
+    {
+        return [
+            'id',
+            'id_university',
+            'name'
+        ];
+    }
 }

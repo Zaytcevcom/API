@@ -5,9 +5,9 @@ use api\controllers\DataController;
 $controller = new DataController($request, $response, $args);
 
 // Params
-$ids = $controller->getToArrayInt('city_ids');
+$ids = $controller->getToArrayInt('ids');
 
-// Get cities by id
-$data = $controller->getCitiesById($ids);
+// Get universities by id
+$data = $controller->getUniversitiesById($ids);
 
 return $controller->success($data);

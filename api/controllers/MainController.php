@@ -85,6 +85,49 @@ class MainController
         return (int)$data;
     }
 
+    public function getToArrayInt(string $param) : array
+    {
+        $data = [];
+
+        $params = $this->getParams();
+
+        if (isset($params[$param])) {
+
+            $arr = explode(',', trim($params[$param]));
+
+            foreach ($arr as $value) {
+                $data[] = (int)$value;
+            }
+        }
+
+        return array_unique($data);
+    }
+
+    public function getToArrayString(string $param) : array
+    {
+        $data = [];
+
+        $params = $this->getParams();
+
+        if (isset($params[$param])) {
+
+            $arr = explode(',', trim($params[$param]));
+
+            foreach ($arr as $value) {
+
+                $value = (string)trim($value);
+
+                if ($value == '') {
+                    continue;
+                }
+                
+                $data[] = $value;
+            }
+        }
+
+        return array_unique($data);
+    }
+
     /* *** Check count and offset ******************************* */
 
     public function checkCount(int $count = null, int $max_value = null) : int

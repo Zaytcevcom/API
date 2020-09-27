@@ -15,5 +15,18 @@ class DataRegion extends MainModel
 {
     protected $table = 'data_region';
 
-    protected $fillable = ['id_country', 'name'];
+    protected $fillable = [
+        'id_country',
+        'name'
+    ];
+
+    // Get the available fields
+    public static function getAvailableFields()
+    {
+        return [
+            'id',
+            'id_country',
+            'name'
+        ];
+    }
 }

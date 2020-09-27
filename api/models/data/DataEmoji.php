@@ -31,7 +31,7 @@ use api\models\MainModel;
  * @property int $has_img_facebook
  * @property int $has_img_lo
  */
-class DataChair extends MainModel
+class DataEmoji extends MainModel
 {
     protected $table = 'data_emoji';
 
