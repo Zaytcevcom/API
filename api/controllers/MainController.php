@@ -4,6 +4,14 @@ declare(strict_types=1);
 
 namespace api\controllers;
 
+/**
+ * @OA\Info(title="API Documentation", version="1.0")
+ * 
+ * @OA\Get(
+ *     path="/api/resource.json",
+ *     @OA\Response(response="200", description="Description")
+ * )
+ */
 class MainController
 {
     protected $request  = null;

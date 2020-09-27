@@ -9,6 +9,31 @@ $app->get('/', function (Request $request, Response $response, $args) use ($conf
     return $response;
 });
 
+// Swagger
+$app->get('/swagger[/{format}]', function (Request $request, Response $response, $args) use ($config) {
+    
+    $openapi = \OpenApi\scan('api/controllers');
+
+    // Yaml
+    if ($args['format'] == 'yaml') {
+        
+        $response->getBody()
+            ->write($openapi->toYaml());
+
+        return $response
+            ->withHeader('Content-Type', 'application/x-yaml')
+            ->withStatus(200);
+    }
+
+    // JSON
+    $response->getBody()
+        ->write(json_encode($openapi, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
+
+    return $response
+        ->withHeader('Content-Type', 'application/json; charset=utf-8')
+        ->withStatus(200);
+});
+
 // Other
 $app->get('/{page}', function (Request $request, Response $response, $args) use ($config) {
     $response->getBody()->write('/' . $args['page']);
