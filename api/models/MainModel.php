@@ -14,6 +14,6 @@ class MainModel extends Model
     // Get the available fields
     public static function getAvailableFields()
     {
-        
+        return [];
     }
 }

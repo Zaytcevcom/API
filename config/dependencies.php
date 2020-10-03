@@ -7,7 +7,7 @@ $container = $app->getContainer();
 // Service factory for the ORM
 $container->set('db', function () {
 
-    $db = require ROOT_DIR . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . 'db.php';
+    $db = require ROOT_DIR . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . 'db.local.php';
     
     $capsule = new \Illuminate\Database\Capsule\Manager;
     $capsule->addConnection([

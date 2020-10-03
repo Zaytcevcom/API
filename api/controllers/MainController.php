@@ -6,11 +6,6 @@ namespace api\controllers;
 
 /**
  * @OA\Info(title="API Documentation", version="1.0")
- * 
- * @OA\Get(
- *     path="/api/resource.json",
- *     @OA\Response(response="200", description="Description")
- * )
  */
 class MainController
 {
@@ -48,6 +43,28 @@ class MainController
     }
 
     /* *** Check request params ********************************* */
+
+    public function checkRequireFields($fields)
+    {
+        $data = [];
+
+        $params = $this->getParams();
+
+        foreach ($fields as $field) {
+            if (!isset($params[$field])) {
+                $data[] = $field;
+            }    
+        }
+
+        return $data;
+    }
+
+    public function needFields($fields)
+    {
+        $message = 'Missing a required field: `' . $fields[0] . '`';
+
+        return $this->error(1, $message);
+    }
 
     public function getToStringOrNull(string $param)
     {
@@ -136,6 +153,17 @@ class MainController
         return array_unique($data);
     }
 
+    public function getToPhoneOrNull(string $param)
+    {
+        $params = $this->getParams();
+
+        if (isset($params[$param])) {
+            return (string)$this->phoneTrim($params[$param]);
+        }
+
+        return null;
+    }
+
     /* *** Check count and offset ******************************* */
 
     public function checkCount(int $count = null, int $max_value = null) : int
@@ -189,6 +217,20 @@ class MainController
     }
 
     /**
+     * @param int $code
+     * @param string $message
+     */
+    public function error(int $code, string $message = '')
+    {
+        $data = [
+            'code'    => $code,
+            'message' => $message
+        ];
+
+        return $this->failure($data, 405, $data['message']);
+    }
+
+    /**
      * Return success response
      */
     public function success($data)
@@ -215,5 +257,43 @@ class MainController
         ];
 
         return $this->failure($data, 405, $data['message']);
+    }
+
+    /* *** Unique *********************************************** */
+
+    /**
+     * Return unique string
+     */
+    public function uniqid(string $str = '')
+    {
+        return time() . '.' . md5($str . 'z' . uniqid());
+    }
+
+    /* *** Checking ********************************************* */
+    
+    public function phoneCheck(string $phone = null) : int
+    {
+        $phone = $this->phoneTrim($phone);
+
+        $length = strlen($phone);
+
+        if ($length == 11) {
+            return 1;
+        }
+
+        return 0;
+    }
+
+    public function phoneTrim(string $phone = null)
+    {
+        $arr = [' ', '(', ')', '+', '-', '.'];
+
+        $str = str_replace($arr, '', $phone);
+
+        if ($str == '') {
+            return null;
+        }
+
+        return $str;
     }
 }

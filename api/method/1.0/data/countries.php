@@ -5,12 +5,13 @@ use api\controllers\DataController;
 $controller = new DataController($request, $response, $args);
 
 // Params
+$ids        = $controller->getToArrayInt('ids');
 $search     = $controller->getToStringOrNull('search');
-$id_country = $controller->getToIntOrNull('id_university');
+$need_all   = $controller->getToInt('need_all');
 $count      = $controller->getToIntOrNull('count');
 $offset     = $controller->getToIntOrNull('offset');
 
-// Get faculties
-$data = $controller->getFaculties($search, $id_university, $count, $offset);
+// Get countries
+$data = $controller->getCountries($ids, $search, $need_all, $count, $offset);
 
 return $controller->success($data);

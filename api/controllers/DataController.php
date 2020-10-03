@@ -18,21 +18,28 @@ use api\models\data\DataUniversity;
  */
 class DataController extends MainController
 {   
+    const MAX_COUNT = 1000;
+
     /* *** Emoji *************************************************** */
 
     /**
      * Get all emoji
+     * @param array|null $ids
      * @param string|null $search
      * @param int|null $count
      * @param int|null $offset
      * @return array
      */
-    public function getEmoji(string $search = null, int $count = null, int $offset = null) : array
+    public function getEmoji(array $ids = [], string $search = null, int $count = null, int $offset = null) : array
     {
-        $count  = $this->checkCount($count, 5000);
+        $count  = $this->checkCount($count, self::MAX_COUNT);
         $offset = $this->checkOffset($offset);
 
         $query = DataEmoji::select(DataEmoji::getAvailableFields());
+
+        if (!empty($ids)) {
+            $query->whereIn('id', $ids);
+        }
 
         if (!is_null($search)) {
             $query->where('name', 'like', $search . '%');
@@ -48,18 +55,23 @@ class DataController extends MainController
 
     /**
      * Get all countries
+     * @param array|null $ids
      * @param string|null $search
      * @param int|null $need_all
      * @param int|null $count
      * @param int|null $offset
      * @return array
      */
-    public function getCountries(string $search = null, int $need_all = 1, int $count = null, int $offset = null) : array
+    public function getCountries(array $ids = [], string $search = null, int $need_all = 1, int $count = null, int $offset = null) : array
     {
-        $count  = $this->checkCount($count, 5000);
+        $count  = $this->checkCount($count, self::MAX_COUNT);
         $offset = $this->checkOffset($offset);
 
         $query = DataCountry::select(DataCountry::getAvailableFields());
+
+        if (!empty($ids)) {
+            $query->whereIn('id', $ids);
+        }
 
         if (!is_null($search)) {
             $query->where('name', 'like', $search . '%');
@@ -76,38 +88,27 @@ class DataController extends MainController
         ];
     }
 
-    /**
-     * Get countries by id
-     * @param array $ids
-     * @return array
-     */
-    public function getCountriesById(array $ids) : array
-    {
-        $query = DataCountry::select(DataCountry::getAvailableFields())
-            ->whereIn('id', $ids);
-
-        return [
-            'count' => $query->count(),
-            'items' => $query->get()->toArray()
-        ];
-    }
-
     /* *** Regions ************************************************* */
 
     /**
      * Get all regions
+     * @param array|null $ids
      * @param string|null $search
      * @param int|null $id_country
      * @param int|null $count
      * @param int|null $offset
      * @return array
      */
-    public function getRegions(string $search = null, int $id_country = null, int $count = null, int $offset = null) : array
+    public function getRegions(array $ids = [], string $search = null, int $id_country = null, int $count = null, int $offset = null) : array
     {
-        $count  = $this->checkCount($count, 5000);
+        $count  = $this->checkCount($count, self::MAX_COUNT);
         $offset = $this->checkOffset($offset);
 
         $query = DataRegion::select(DataRegion::getAvailableFields());
+
+        if (!empty($ids)) {
+            $query->whereIn('id', $ids);
+        }
 
         if (!is_null($search)) {
             $query->where('name', 'like', $search . '%');
@@ -120,22 +121,6 @@ class DataController extends MainController
         return [
             'count' => $query->count(),
             'items' => $query->take($count)->skip($offset)->get()->toArray()
-        ];
-    }
-
-    /**
-     * Get regions by id
-     * @param array $ids
-     * @return array
-     */
-    public function getRegionsById(array $ids) : array
-    {
-        $query = DataRegion::select(DataRegion::getAvailableFields())
-            ->whereIn('id', $ids);
-
-        return [
-            'count' => $query->count(),
-            'items' => $query->get()->toArray()
         ];
     }
 
@@ -143,18 +128,23 @@ class DataController extends MainController
 
     /**
      * Get all cities
+     * @param array|null $ids
      * @param string|null $search
      * @param int|null $id_country
      * @param int|null $count
      * @param int|null $offset
      * @return array
      */
-    public function getCities(string $search = null, int $id_country = null, int $count = null, int $offset = null) : array
+    public function getCities(array $ids = [], string $search = null, int $id_country = null, int $count = null, int $offset = null) : array
     {
-        $count  = $this->checkCount($count, 5000);
+        $count  = $this->checkCount($count, self::MAX_COUNT);
         $offset = $this->checkOffset($offset);
 
         $query = DataCity::select(DataCity::getAvailableFields());
+
+        if (!empty($ids)) {
+            $query->whereIn('id', $ids);
+        }
 
         if (!is_null($search)) {
             $query->where('name', 'like', $search . '%');
@@ -170,38 +160,27 @@ class DataController extends MainController
         ];
     }
 
-    /**
-     * Get cities by id
-     * @param array $ids
-     * @return array
-     */
-    public function getCitiesById(array $ids) : array
-    {
-        $query = DataCity::select(DataCity::getAvailableFields())
-            ->whereIn('id', $ids);
-
-        return [
-            'count' => $query->count(),
-            'items' => $query->get()->toArray()
-        ];
-    }
-
     /* *** Universities ******************************************** */
 
     /**
      * Get all universities
+     * @param array|null $ids
      * @param string|null $search
      * @param int|null $id_city
      * @param int|null $count
      * @param int|null $offset
      * @return array
      */
-    public function getUniversities(string $search = null, int $id_city = null, int $count = null, int $offset = null) : array
+    public function getUniversities(array $ids = [], string $search = null, int $id_city = null, int $count = null, int $offset = null) : array
     {
-        $count  = $this->checkCount($count, 5000);
+        $count  = $this->checkCount($count, self::MAX_COUNT);
         $offset = $this->checkOffset($offset);
 
         $query = DataUniversity::select(DataUniversity::getAvailableFields());
+
+        if (!empty($ids)) {
+            $query->whereIn('id', $ids);
+        }
 
         if (!is_null($search)) {
             $query->where('name', 'like', $search . '%');
@@ -217,38 +196,27 @@ class DataController extends MainController
         ];
     }
 
-    /**
-     * Get universities by id
-     * @param array $ids
-     * @return array
-     */
-    public function getUniversitiesById(array $ids) : array
-    {
-        $query = DataUniversity::select(DataUniversity::getAvailableFields())
-            ->whereIn('id', $ids);
-
-        return [
-            'count' => $query->count(),
-            'items' => $query->get()->toArray()
-        ];
-    }
-
     /* *** Faculties *********************************************** */
 
     /**
      * Get all faculties
+     * @param array|null $ids
      * @param string|null $search
      * @param int|null $id_university
      * @param int|null $count
      * @param int|null $offset
      * @return array
      */
-    public function getFaculties(string $search = null, int $id_university = null, int $count = null, int $offset = null) : array
+    public function getFaculties(array $ids = [], string $search = null, int $id_university = null, int $count = null, int $offset = null) : array
     {
-        $count  = $this->checkCount($count, 5000);
+        $count  = $this->checkCount($count, self::MAX_COUNT);
         $offset = $this->checkOffset($offset);
 
         $query = DataFaculty::select(DataFaculty::getAvailableFields());
+
+        if (!empty($ids)) {
+            $query->whereIn('id', $ids);
+        }
 
         if (!is_null($search)) {
             $query->where('name', 'like', $search . '%');
@@ -264,38 +232,27 @@ class DataController extends MainController
         ];
     }
 
-    /**
-     * Get faculties by id
-     * @param array $ids
-     * @return array
-     */
-    public function getFacultiesById(array $ids) : array
-    {
-        $query = DataFaculty::select(DataFaculty::getAvailableFields())
-            ->whereIn('id', $ids);
-
-        return [
-            'count' => $query->count(),
-            'items' => $query->get()->toArray()
-        ];
-    }
-
     /* *** Chairs ************************************************** */
 
     /**
      * Get all chairs
+     * @param array|null $ids
      * @param string|null $search
      * @param int|null $id_faculty
      * @param int|null $count
      * @param int|null $offset
      * @return array
      */
-    public function getChairs(string $search = null, int $id_faculty = null, int $count = null, int $offset = null) : array
+    public function getChairs(array $ids = [], string $search = null, int $id_faculty = null, int $count = null, int $offset = null) : array
     {
-        $count  = $this->checkCount($count, 5000);
+        $count  = $this->checkCount($count, self::MAX_COUNT);
         $offset = $this->checkOffset($offset);
 
         $query = DataChair::select(DataChair::getAvailableFields());
+
+        if (!empty($ids)) {
+            $query->whereIn('id', $ids);
+        }
 
         if (!is_null($search)) {
             $query->where('name', 'like', $search . '%');
@@ -311,38 +268,27 @@ class DataController extends MainController
         ];
     }
 
-    /**
-     * Get chairs by id
-     * @param array $ids
-     * @return array
-     */
-    public function getChairsById(array $ids) : array
-    {
-        $query = DataChair::select(DataChair::getAvailableFields())
-            ->whereIn('id', $ids);
-
-        return [
-            'count' => $query->count(),
-            'items' => $query->get()->toArray()
-        ];
-    }
-
     /* *** Schools ************************************************* */
 
     /**
      * Get all schools
+     * @param array|null $ids
      * @param string|null $search
      * @param int|null $id_city
      * @param int|null $count
      * @param int|null $offset
      * @return array
      */
-    public function getSchools(string $search = null, int $id_city = null, int $count = null, int $offset = null) : array
+    public function getSchools(array $ids = [], string $search = null, int $id_city = null, int $count = null, int $offset = null) : array
     {
-        $count  = $this->checkCount($count, 5000);
+        $count  = $this->checkCount($count, self::MAX_COUNT);
         $offset = $this->checkOffset($offset);
 
         $query = DataSchool::select(DataSchool::getAvailableFields());
+
+        if (!empty($ids)) {
+            $query->whereIn('id', $ids);
+        }
 
         if (!is_null($search)) {
             $query->where('name', 'like', $search . '%');
@@ -355,22 +301,6 @@ class DataController extends MainController
         return [
             'count' => $query->count(),
             'items' => $query->take($count)->skip($offset)->get()->toArray()
-        ];
-    }
-
-    /**
-     * Get schools by id
-     * @param array $ids
-     * @return array
-     */
-    public function getSchoolsById(array $ids) : array
-    {
-        $query = DataSchool::select(DataSchool::getAvailableFields())
-            ->whereIn('id', $ids);
-
-        return [
-            'count' => $query->count(),
-            'items' => $query->get()->toArray()
         ];
     }
 }

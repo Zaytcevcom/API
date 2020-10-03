@@ -9,10 +9,10 @@ $app->get('/', function (Request $request, Response $response, $args) use ($conf
     return $response;
 });
 
-// Swagger
-$app->get('/swagger[/{format}]', function (Request $request, Response $response, $args) use ($config) {
+// OpenApi
+$app->get('/openapi[/{format}]', function (Request $request, Response $response, $args) use ($config) {
     
-    $openapi = \OpenApi\scan('api/controllers');
+    $openapi = \OpenApi\scan('api');
 
     // Yaml
     if ($args['format'] == 'yaml') {
